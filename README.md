@@ -57,3 +57,31 @@ Projects need to be approved prior to launching into them, so take some time to 
 # in config/environment.rb add this line:
 ActiveRecord::Base.logger = nil
 ```
+
+
+
+###
+#
+User methods
+User.findby
+Check UI with available recipes (compare prices)
+create meal given recipe as argument. (store meal)
+
+Recipe methods
+access instructions
+find list of recipes based on keywords
+estimate cost of recipe
+estimate meals of recipe
+
+Meal methods
+
+
+
+Ingredient methods
+
+
+
+RI methods
+
+UI methods
+
