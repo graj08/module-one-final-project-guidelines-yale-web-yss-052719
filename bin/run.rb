@@ -3,6 +3,3 @@ require_relative '../config/seed'
 require_relative '../config/CLI'
 
 
-0
-
-

@@ -44,10 +44,41 @@ puts "Please select a recipe to add ingredients to your shopping cart."
 userRecipeInput = gets.chomp
 userRecipe = Recipe.find_by(name: userRecipeInput)
 
+until userRecipe != nil do
+    if userRecipe == nil 
+        puts "Sorry, but we can't seem to find that recipe, please try again"
+        userRecipeInput = gets.chomp
+        userRecipe = Recipe.find_by(name: userRecipeInput)
+    end
+end
+
+puts "Ok, we are adding #{userRecipe.name} to your recipe list now. How many portions of that recipe would you like to make?"
+userInput = gets.chomp.to_f
+until userInput.class == Float || userInput.class == Integer
+    puts "Please enter a number to specify the amount of portions of this recipe that you would like to make"
+    userInput = gets.chomp.to_f
+end
+portions = userInput
+activeUser.do_recipe(userRecipe, portions)
+puts "All of the necceessary ingredients have been added to your shopping list. Here are a list of recipes you can make at the lowest marginal cost given the ingredients that you already have."
+activeUser.marginal_cost_recipes.each do |recipe, cost|
+    puts"#{recipe.name}" + ", " + "#{cost}"
+end
 
 
-#chooses recipe
-#buys ingredients(adds to UI), adds meals(CREATES MEALS), 
+puts "Would you like to add any of these recipes to your current recipe and meal list?"
+userInput = gets.chomp
+if userInput.downcase == "No".downcase
+
+
+
+
+
+
+
+
+
+
 #gives list of recipes at lowest marginal cost
 ##loop until end
 ##choose recipe
