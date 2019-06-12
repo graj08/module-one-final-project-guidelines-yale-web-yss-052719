@@ -27,7 +27,7 @@ class Recipe < ActiveRecord::Base
             if leftovers[ri.ingredient].nil?
                 groceries_needed[ri.ingredient]= ri.quantity
             else excess_needed = leftovers[ri.ingredient] - ri.quantity
-            groceries_needed[ri.ingredient]= [-excess_needed,0].max
+                groceries_needed[ri.ingredient]= [-excess_needed,0].max
             end
         end
         groceries_needed
