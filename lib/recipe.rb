@@ -19,14 +19,14 @@ class Recipe < ActiveRecord::Base
         #get a user's current ingredients (UserIngredients)
         #get a recipe's ingredients needed
         #subtract to find what extra ingredients are needed
-        pantry = user.user_ingredients
+        leftovers = user.leftovers
         needs = self.recipe_ingredients
 
         groceries_needed = {}
         needs.map do |ri|
-            if pantry.find_by(ingredient_id: ri.ingredient.id, user: user).nil?
+            if leftovers[ri.ingredient].nil?
                 groceries_needed[ri.ingredient]= ri.quantity
-            else excess_needed = pantry.find_by(ingredient_id: ri.ingredient.id, user: user).quantity - ri.quantity
+            else excess_needed = leftovers[ri.ingredient] - ri.quantity
             groceries_needed[ri.ingredient]= [-excess_needed,0].max
             end
         end
