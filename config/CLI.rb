@@ -65,21 +65,65 @@ activeUser.marginal_cost_recipes.each do |recipe, cost|
     puts"#{recipe.name}" + ", " + "#{cost}"
 end
 
+until userInput == "No".downcase do
+puts "Would you like to add any of these recipes to your current  meal list?"
+userInput = gets.chomp 
+if userInput.downcase == "Yes".downcase
+    puts "Which of these recipes would you like to add?"
+    userInput2 = gets.chomp
+    until userRecipe != nil do
+        if userRecipe == nil 
+            puts "Sorry, but we can't seem to find that recipe, please try again"
+            userRecipeInput = gets.chomp
+            userRecipe = Recipe.find_by(name: userRecipeInput)
+        end
+    end
+    puts "Ok, we are adding #{userRecipe.name} to your recipe list now. How many portions of that recipe would you like to make?"
+    userInput = gets.chomp.to_f
+    until userInput.class == Float || userInput.class == Integer
+    puts "Please enter a number to specify the amount of portions of this recipe that you would like to make"
+    userInput = gets.chomp.to_f
+    end
+    portions = userInput
+    activeUser.do_recipe(userRecipe, portions)
+    puts "All of the necceessary ingredients have been added to your shopping list. Here are a list of recipes you can make at the lowest marginal cost given the ingredients that you already have."
+    activeUser.marginal_cost_recipes.each do |recipe, cost|
+    puts"#{recipe.name}" + ", " + "#{cost}"
+end
+elsif userInput.downcase == "No".downcase
+    break
+else 
+    puts "Please choose an anwser of either 'Yes' or 'No' to continue."
+end
+end
 
-puts "Would you like to add any of these recipes to your current recipe and meal list?"
-userInput = gets.chomp
-if userInput.downcase == "No".downcase
-
-
-
-
-##loop until end
-##choose recipe
-##buys ingredients(adds to UI), adds meals(CREATES MEALS), 
-#end
-#view shopping list 
-# Would you like to do anything else?
-    #another recipe
-    #view leftoevers
-    #buy items
+userInput2  = ""
+until userInput2.downcase == "Done".downcase
+puts "Is there anything else that you would like to do?"
+puts "Options: Create another recipe, View leftovers, View shopping list, View pantry, buy groceries."
+puts "If you are done using our application, please type 'Done' and press enter"
+userInput2 = gets.chomp 
+if userInput2.downcase == "Create another recipe".downcase
+     puts "Please enter a recipe with the following fields in the demonstrated format in order to add a recipe to our database: #{"RecipeName"}, #{"Instructions"}, Servings(As a number), 'ingredient', 'ingredient', 'ingredient'..."
+     userInput3 = gets.chomp.split(",")
+    Recipe.create(name: userInput3[0], process: userInput3[1], servings: userInput3[2])
+    x2 = Recipe.find_by(name: userInput3[0], process: userInput3[1], servings: userInput3[2])
+    userInput3[3..999].each { |x| Ingredient.create(name: x)}
+    userInput3[3..999].each { |x| RecipeIngredient.create(ingredient: Ingredient.find_by(name: x),recipe: x2) } 
+    puts "Ok. Your recipe has been added!"
+     elsif userInput2.downcase == "View Pantry".downcase
+     puts "#{activeUser.leftovers}"
+     elsif userInput2.downcase == "View Shopping List.".downcase
+        puts "#{activeUser.shopping_list}"
+     elsif userInput2.downcase == "Buy Groceries".downcase 
+      puts "What ingredients would you like to add to your pantry? Please enter in the following format: 'ingredient', 'ingredient', 'ingredient'..."
+      userInput4 = gets.chomp.split(",")
+      userInput4.each { |x| activeUser.buy_ingredient(Ingredient.find_or_create_by(name: x))}
+      puts "The Ingredients have been added into your pantry!"
+     else 
+      puts "Please select one of the following options: 'Create another recipe', 'View leftovers', 'Buy Groceries'. If you are done using our application, please type 'done' and press enter"
+    end
+end
     
+
+
