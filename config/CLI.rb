@@ -73,14 +73,13 @@ if userInput.downcase == "No".downcase
 
 
 
-
-
-
-
-
-
-#gives list of recipes at lowest marginal cost
 ##loop until end
 ##choose recipe
 ##buys ingredients(adds to UI), adds meals(CREATES MEALS), 
 #end
+#view shopping list 
+# Would you like to do anything else?
+    #another recipe
+    #view leftoevers
+    #buy items
+    
