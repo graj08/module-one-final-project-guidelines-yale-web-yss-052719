@@ -5,6 +5,13 @@ class Recipe < ActiveRecord::Base
     has_many :ingredients, through: :recipe_ingredients
     has_many :users, through: :meals
 
+    def add_recipe(ingredient_hash)
+        ingredient_hash.each do |ingredient, value|
+            RecipeIngredient.create(ingredient: ingredient, recipe: self, quantity: value)
+        end
+    end
+
+
     def standalone_cost
         #get all the RecipeIngredients needed for this recipe
         #calculate the cost of each RecipeIngredient based on their prices from the Ingredients and the quantity needed in RecipeIngredients

@@ -24,6 +24,3 @@ RecipeIngredient.create(recipe: curryPotatoesAndBeef, ingredient: beef, quantity
 RecipeIngredient.create(recipe: curryPotatoesAndBeef, ingredient: potatoes, quantity: 2)
 RecipeIngredient.create(recipe: curryPotatoesAndBeef, ingredient: curry, quantity: 1)
 
-binding.pry
-
-
