@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(version: 6) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
-    t.float  "price"
-    t.float  "quantity_at_grocery"
+    t.float "price"
+    t.float "quantity_at_grocery"
     t.string "measure"
   end
 
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 6) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string  "name"
-    t.text    "process"
+    t.string "name"
+    t.text "process"
     t.integer "servings"
   end
 

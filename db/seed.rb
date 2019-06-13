@@ -27,7 +27,6 @@ russet_potato = Ingredient.create(name: "russet potato",price: 2.99,quantity_at_
 yellow_onion = Ingredient.create(name: "yellow onion",price: 2.99,quantity_at_grocery: 3,measure: "lb")
 red_onion = Ingredient.create(name: "red onion",price: 2.99,quantity_at_grocery: 3,measure: "lb")
 roma_tomato = Ingredient.create(name: "roma tomato",price: 2.99,quantity_at_grocery: 1.5,measure: "lb")
-red_onion = Ingredient.create(name: "red onion",price: 2.99,quantity_at_grocery: 3,measure: "lb")
 beefsteak_tomato = Ingredient.create(name: "beefsteak tomato",price: 1.00,quantity_at_grocery: 1,measure: "lb")
 yukon_potato = Ingredient.create(name: "yukon potato",price: 2.99,quantity_at_grocery: 5,measure: "lb")
 garlic = Ingredient.create(name: "garlic",price: 5.00,quantity_at_grocery: 1,measure: "lb")
@@ -41,7 +40,7 @@ lime = Ingredient.create(name: "lime",price: 1.00,quantity_at_grocery: 1.0,measu
 avocado = Ingredient.create(name: "avocado",price: 5.99,quantity_at_grocery: 2,measure: "each")
 cayenne_pepper = Ingredient.create(name: "cayenne pepper",price: 2.00,quantity_at_grocery: 3,measure: "oz")
 cumin = Ingredient.create(name: "cumin",price: 2.00,quantity_at_grocery: 3,measure: "oz")
-eggs = Ingredient.create(name: "eggs",price: 4.99,quantity_at_grocery: 12,measure: "each")
+egg = Ingredient.create(name: "egg",price: 4.99,quantity_at_grocery: 12,measure: "each")
 milk = Ingredient.create(name: "milk",price: 2.99,quantity_at_grocery: 0.5,measure: "gallon")
 ginger = Ingredient.create(name: "ginger",price: 4.99,quantity_at_grocery: 1,measure: "lb")
 scallion = Ingredient.create(name: "scallions",price: 2.99,quantity_at_grocery: 6,measure: "each")
@@ -60,7 +59,7 @@ wine_vinegar = Ingredient.create(name: "wine vinegar",price: 4.99,quantity_at_gr
 chicken_leg = Ingredient.create(name: "chicken legs",price: 3.99,quantity_at_grocery: 1,measure: "lb")
 chicken_thigh = Ingredient.create(name: "chicken thighs",price: 4.99,quantity_at_grocery: 1,measure: "lb")
 chicken_breast = Ingredient.create(name: "chicken breasts",price: 5.99,quantity_at_grocery: 1,measure: "lb")
-steak = Ingredient.create(name: "steak",price: 9.99,quantity_at_grocery: 1,measure: "lb")
+ribeye = Ingredient.create(name: "ribeye",price: 12.99,quantity_at_grocery: 1,measure: "lb")
 pork_chop = Ingredient.create(name: "pork chop",price: 8.99,quantity_at_grocery: 1,measure: "lb")
 ground_beef = Ingredient.create(name: "ground beef",price: 4.99,quantity_at_grocery: 1,measure: "lb")
 ground_chicken = Ingredient.create(name: "ground chicken",price: 5.99,quantity_at_grocery: 1,measure: "lb")
@@ -77,6 +76,8 @@ olive_oil = Ingredient.create(name: "olive_oil",price: 7.99,quantity_at_grocery:
 sugar = Ingredient.create(name: "sugar",price: 7.99,quantity_at_grocery: 1,measure: "lb")
 chocolate = Ingredient.create(name: "chocolate",price: 8.99,quantity_at_grocery: 1,measure: "lb")
 tortilla = Ingredient.create(name: "tortilla",price: 3.99,quantity_at_grocery: 1,measure: "lb")
+yogurt = Ingredient.create(name: "yogurt",price: 4.99,quantity_at_grocery: 1,measure: "lb")
+curry_paste = Ingredient.create(name: "curry paste",price: 4.99,quantity_at_grocery: 0.5,measure: "lb")
 
 
 enchiladas = Recipe.create(name: "enchiladas", process: "Coat large saute pan with oil. Season chicken with salt and pepper. Brown chicken over medium heat, allow 7 minutes each side or until no longer pink. Sprinkle chicken with cumin, garlic powder and Mexican spices before turning. Remove chicken to a platter, allow to cool.
@@ -174,12 +175,22 @@ burger = Recipe.create(name: "burger", process: "Preheat an outdoor grill for hi
 In a medium bowl, whisk together egg, salt and pepper. Place ground beef and bread crumbs into the mixture. With hands or a fork, mix until well blended. Form into 4 patties approximately 3/4 inch thick.
 Place patties on the prepared grill. Cover and cook 6 to 8 minutes per side, or to desired doneness.", servings: 4)
 
-
-
-
-
-
-
-
-
-
+enchiladas.add_recipe({tortilla => 6, roma_tomato => 4, chicken_thigh => 5, yellow_onion => 2, garlic => 0.2, salt => 0.05, pepper => 0.05, jalapeno => 0.25})
+greek_yogurt.add_recipe({yogurt => 0.5, raspberry => 0.5, chocolate => 0.25, blueberry => 1})
+soy_chicken.add_recipe({soy => 0.25, ground_chicken => 1, yellow_onion => 1, roma_tomato => 1})
+soy_pork.add_recipe({soy => 0.25, ground_pork => 1, yellow_onion => 1, roma_tomato => 1})
+soy_beef.add_recipe({soy => 0.25, ground_beef => 1, yellow_onion => 1, roma_tomato => 1})
+soy_steak.add_recipe({soy => 0.25, ribeye => 1, yellow_onion => 1, roma_tomato => 1})
+cookies.add_recipe({flour => 1, baking_soda => 0.05, baking_powder => 0.05, chocolate => 0.5, sugar => 0.5, butter => 0.5})
+avocado_toast.add_recipe({avocado => 2, bread => 0.25})
+thai_curry.add_recipe({curry_paste => 0.25, chicken_breast => 0.5, pea => 0.5, russet_potato => 0.25, rice => 0.5, salt => 0.1, jalapeno => 0.3})
+indian_curry.add_recipe({curry_paste => 0.5, chicken_leg => 0.5, yukon_potato => 1, rice => 1, pea => 0.25, salt => 0.1, jalapeno => 0.4 })
+japanese_curry.add_recipe({curry_paste => 0.5, pork_chop => 1, rice => 1, pea => 0.25, salt => 0.1, jalapeno => 0.2})
+steak.add_recipe({ribeye => 2, salt => 0.1, pepper => 0.1})
+chili.add_recipe({roma_tomato => 4, yellow_onion => 2, ground_beef => 1, ground_pork => 2, cumin => 0.5, salt => 0.1, pepper => 0.2, jalapeno => 2})
+fried_chicken.add_recipe({chicken_leg => 2, chicken_breast => 2, chicken_thigh => 2, salt => 0.2, pepper => 0.1})
+chicken_piccata.add_recipe({chicken_leg => 2, chicken_breast => 2, salt => 0.1, lemon => 1, vinegar => 0.2})
+pound_cake.add_recipe({sugar => 1, flour => 1, butter => 1, milk => 0.1, baking_soda => 0.1, baking_powder => 0.1, salt => 0.05})
+fried_rice.add_recipe({rice => 1, carrot => 1, pea => 1, yellow_onion => 1, salt => 0.1, pepper => 0.1, jalapeno => 0.1, egg => 2})
+omelet.add_recipe({egg => 4, shallot => 1, scallion => 1, salt => 0.1, pepper => 0.2})
+burger.add_recipe({ground_beef => 3, bread => 1, cheddar => 1, beefsteak_tomato => 1, red_onion => 1, salt => 0.1, pepper =>0.3})
