@@ -42,15 +42,16 @@ class Recipe < ActiveRecord::Base
 
 
     def marginal_cost(user)
-        #price those extra ingredients
+        #get the extra groceries needed (note: not adjusted to quantity_at_grocery)
         groceries_needed = self.groceries_needed(user)
+        #price those extra ingredients
         price_groceries(groceries_needed)
     end
 
     def price_groceries(cart)
         total = 0
         cart.each do |ingredient, quantity|
-            total += (quantity * (ingredient.price/ingredient.quantity_at_grocery))
+            total += ((quantity/ingredient.quantity_at_grocery).ceil * (ingredient.price))
         end
         total
     end
