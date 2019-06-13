@@ -175,7 +175,7 @@ burger = Recipe.create(name: "burger", process: "Preheat an outdoor grill for hi
 In a medium bowl, whisk together egg, salt and pepper. Place ground beef and bread crumbs into the mixture. With hands or a fork, mix until well blended. Form into 4 patties approximately 3/4 inch thick.
 Place patties on the prepared grill. Cover and cook 6 to 8 minutes per side, or to desired doneness.", servings: 4)
 
-enchiladas.add_recipe({tortilla => 6, roma_tomato => 4, chicken_thigh => 5, yellow_onion => 2, garlic => 0.2, salt => 0.05, pepper => 0.05, jalapeno => 0.25})
+enchiladas.add_recipe({tortilla => 1, roma_tomato => 4, chicken_thigh => 5, yellow_onion => 2, garlic => 0.2, salt => 0.05, pepper => 0.05, jalapeno => 0.25})
 greek_yogurt.add_recipe({yogurt => 0.5, raspberry => 0.5, chocolate => 0.25, blueberry => 1})
 soy_chicken.add_recipe({soy => 0.25, ground_chicken => 1, yellow_onion => 1, roma_tomato => 1})
 soy_pork.add_recipe({soy => 0.25, ground_pork => 1, yellow_onion => 1, roma_tomato => 1})
