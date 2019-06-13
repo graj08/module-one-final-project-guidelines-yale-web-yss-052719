@@ -1,10 +1,10 @@
 class Program
 
+    def initialize
 prompt = TTY::Prompt.new
 
-user = User.new(name: prompt.ask("Thanks for opening The Efficient Chef. This is a command-line-interface tool meant to help optimize your grocery list.
-
-First, what is your name?"))
+input = prompt.ask("Thanks for opening The Efficient Chef. This is a command-line-interface tool meant to help optimize your grocery list. First, what is your name?")
+user = User.new(name: input)
 
 #print out all the recipes
 Recipe.all.each do |recipe|
@@ -73,7 +73,7 @@ end}"
 
 
 
-
+end
 
 
 
