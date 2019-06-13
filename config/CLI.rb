@@ -1,12 +1,15 @@
-#def login
+require 'pry'
+
+def login
     puts "Hello, may I ask what your name is?"
     userName = gets.chomp
     activeUser = User.find_by name: userName
-    #binding.pry
     anwser = ""
     if activeUser == nil
         puts "Sorry, but we do not have you in our system of Users, would you like to make an account?"
+        #binding.pry
     until anwser.downcase == "Yes".downcase || anwser.downcase == "No".downcase do
+        #binding.pry 
         anwser = gets.chomp
         if anwser.downcase == "Yes".downcase
             activeUser = User.create(name: userName)
@@ -18,37 +21,38 @@
             puts "Please enter an anwsery of either 'Yes' or 'No' depending upon whether or not you would like to make an account. =)"
         end
     end
+    end
+  
+    activeUser
+    
+end
 
-#
-#
 
-
-
-#def areyouHungry(activeUser)
+def areyouHungry(activeUser)
     puts "Hello #{activeUser.name}, what are you feeling hungry for this week?"
     userHunger = gets.chomp
-        x = Recipe.all.select do |recipe|
-            #binding.pry
+    x = Recipe.all.select do |recipe|
+        #binding.pry
         recipe.name.downcase == userHunger.downcase || recipe.recipe_ingredients.map  {|x| x.ingredient}.map {|x| x.name}.any? {|x| x == userHunger}
-        end 
-        if x.empty?
-            puts "We couldn't find anything based on what you entered, here are some options that other users have liked"
-            y = []
-            until y.length == 5 do
+    end 
+    if x.empty?
+        puts "We couldn't find anything based on what you entered, here are some options that other users have liked"
+        y = []
+        until y.length == 5 do
             y << Recipe.all[rand(Recipe.all.length)].name
             y.uniq
-            end
-            y.each { |x| puts x }
-        else
+        end
+        y.each { |x| puts x }
+    else
         puts "Here are a list of recipes that might interest you!"
         x.each do |x|
-        puts x.name
-        end
+            puts x.name
         end
     end
-#end
 
-#def doRecipe(activeUser)
+end
+
+def doRecipe(activeUser)
     puts "Please select a recipe to add ingredients to your shopping cart."
     userRecipeInput = gets.chomp
     userRecipe = Recipe.find_by(name: userRecipeInput)
@@ -73,9 +77,11 @@
     activeUser.marginal_cost_recipes.each do |recipe, cost|
         puts"#{recipe.name}" + ", " + "#{cost}"
     end
-#end
 
-#def wouldyouliketoAdd(activeUser)
+end
+
+def wouldyouliketoAdd(activeUser)
+    userInput = " "
     until userInput == "No".downcase do
     puts "Would you like to add any of these recipes to your current  meal list?"
     userInput = gets.chomp 
@@ -107,9 +113,9 @@
         puts "Please choose an anwser of either 'Yes' or 'No' to continue."
     end
     end
-#end
+end
 
-#def extraOptions(activeUser)
+def extraOptions(activeUser)
     userInput2  = ""
     until userInput2.downcase == "Done".downcase
     puts "Is there anything else that you would like to do?"
@@ -125,13 +131,13 @@
     userInput3[3..999].each { |x| RecipeIngredient.create(ingredient: Ingredient.find_by(name: x),recipe: x2) } 
     puts "Ok. Your recipe has been added!"
      elsif userInput2.downcase == "View leftovers".downcase
-        activeUser.leftovers.each do |x|
-            puts "#{x.name}, #{x.quantity_at_grocery}"
+        activeUser.leftovers.each do |x, y|
+            puts "#{x.name}, #{y}"
         end
 
      elsif userInput2.downcase == "View Shopping List".downcase
-        activeUser.leftovers.each do |x|
-            puts "#{x.name}, #{x.quantity_at_grocery}"
+        activeUser.leftovers.each do |x, y|
+            puts "#{x.name}, #{y}"
         end
      elsif userInput2.downcase == "Buy Groceries".downcase 
       puts "What ingredients would you like to add to your pantry? Please enter in the following format: 'ingredient', 'ingredient', 'ingredient'..."
@@ -142,7 +148,7 @@
       puts "Please select one of the following options: 'Create another recipe', 'View leftovers', 'Buy Groceries'. If you are done using our application, please type 'done' and press enter"
     end
     end
-#end  
+end  
   
 
 
