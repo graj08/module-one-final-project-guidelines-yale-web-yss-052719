@@ -5,6 +5,13 @@ class Recipe < ActiveRecord::Base
     has_many :ingredients, through: :recipe_ingredients
     has_many :users, through: :meals
 
+    def add_recipe(ingredient_hash)
+        ingredient_hash.each do |ingredient, value|
+            RecipeIngredient.create(ingredient: ingredient, recipe: self, quantity: value)
+        end
+    end
+
+
     def standalone_cost
         #get all the RecipeIngredients needed for this recipe
         #calculate the cost of each RecipeIngredient based on their prices from the Ingredients and the quantity needed in RecipeIngredients
@@ -19,15 +26,15 @@ class Recipe < ActiveRecord::Base
         #get a user's current ingredients (UserIngredients)
         #get a recipe's ingredients needed
         #subtract to find what extra ingredients are needed
-        pantry = user.user_ingredients
+        leftovers = user.leftovers
         needs = self.recipe_ingredients
 
         groceries_needed = {}
         needs.map do |ri|
-            if pantry.find_by(ingredient_id: ri.ingredient.id, user: user).nil?
+            if leftovers[ri.ingredient].nil?
                 groceries_needed[ri.ingredient]= ri.quantity
-            else excess_needed = pantry.find_by(ingredient_id: ri.ingredient.id, user: user).quantity - ri.quantity
-            groceries_needed[ri.ingredient]= [-excess_needed,0].max
+            else excess_needed = leftovers[ri.ingredient] - ri.quantity
+                groceries_needed[ri.ingredient]= [-excess_needed,0].max
             end
         end
         groceries_needed
